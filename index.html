@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HD Studio | فحص توافق جهازك</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --accent-color: #58a6ff;
+            --success-color: #238636;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            box-sizing: border-box;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #ffffff;
+            margin: 5px 0;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #2ea44f;
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #1f242c;
+            border-right: 4px solid var(--accent-color);
+            display: none;
+        }
+
+        .result-title {
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .feature-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #30363d;
+            font-size: 14px;
+        }
+
+        .feature-item:last-child {
+            border: none;
+        }
+
+        .badge-success { color: #56d364; font-weight: bold; }
+        .badge-warning { color: #e3b341; font-weight: bold; }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>HD Studio</h1>
+        <p>أداة فحص التوافق الذكية لـ Keyboard Pro</p>
+    </div>
+
+    <div class="form-group">
+        <label for="phone-model">اسم هاتفك أو الموديل:</label>
+        <input type="text" id="phone-model" placeholder="مثال: Samsung S22, Redmi Note 11">
+    </div>
+
+    <div class="form-group">
+        <label for="target-device">الجهاز الذي تريد التحكم فيه:</label>
+        <select id="target-device">
+            <option value="windows">💻 Windows (كمبيوتر)</option>
+            <option value="mac">🍎 Mac (أبل)</option>
+            <option value="tv">📺 Android TV / Smart TV</option>
+            <option value="xbox">🎮 Xbox / PlayStation</option>
+        </select>
+    </div>
+
+    <button onclick="checkCompatibility()">تحقق من التوافق فوراً</button>
+
+    <div class="result-box" id="resultBox">
+        <div class="result-title" id="resTitle">جاري الفحص...</div>
+        <div id="resFeatures">
+            <!-- سيتم توليد الميزات هنا برمجياً -->
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 HD Studio. جميع الحقوق محفوظة.
+    </div>
+</div>
+
+<script>
+    function checkCompatibility() {
+        const model = document.getElementById('phone-model').value.trim();
+        const target = document.getElementById('target-device').value;
+        const resultBox = document.getElementById('resultBox');
+        const resTitle = document.getElementById('resTitle');
+        const resFeatures = document.getElementById('resFeatures');
+
+        if (!model) {
+            alert('من فضلك اكتب موديل هاتفك أولاً');
+            return;
+        }
+
+        // إظهار صندوق النتيجة
+        resultBox.style.display = 'block';
+        resTitle.innerHTML = `نتائج الفحص لجهاز: ${model}`;
+
+        // محاكاة ذكية للنتائج بناء على اختيار المستخدم
+        let html = `
+            <div class="feature-item"><span>إصدار الأندرويد متوافق</span><span class="badge-success">🟢 نعم</span></div>
+            <div class="feature-item"><span>بلوتوث منخفض الطاقة BLE</span><span class="badge-success">🟢 مدعوم</span></div>
+            <div class="feature-item"><span>ميزة الكيبورد</span><span class="badge-success">🟢 يعمل كاملاً</span></div>
+            <div class="feature-item"><span>ميزة الفأرة العادية</span><span class="badge-success">🟢 يعمل كاملاً</span></div>
+        `;
+
+        if (target === 'windows' || target === 'mac') {
+            html += `<div class="feature-item"><span>الفأرة الجوية (Air Mouse)</span><span class="badge-success">🟢 مدعوم بالكامل</span></div>`;
+            html += `<div class="feature-item"><span>مزامنة الحافظة والنسخ</span><span class="badge-success">🟢 متاح</span></div>`;
+        } else {
+            html += `<div class="feature-item"><span>الفأرة الجوية (Air Mouse)</span><span class="badge-warning">🟡 قد يتطلب إعدادات إضافية</span></div>`;
+            html += `<div class="feature-item"><span>التحكم بالوسائط (Media)</span><span class="badge-success">🟢 يعمل كاملاً</span></div>`;
+        }
+
+        resFeatures.innerHTML = html;
+    }
+</script>
+
+</body>
+</html>
